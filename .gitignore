@@ -1,4 +1,5 @@
 # https://github.com/gohugoio/hugo/blob/master/.gitignore
+/public
 /hugo
 docs/public*
 /.idea
