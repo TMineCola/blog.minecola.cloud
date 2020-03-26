@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on MineCola 開發日記</title>
+    <link>https://tminecola.github.io/post/</link>
+    <description>Recent content in Posts on MineCola 開發日記</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Wed, 25 Mar 2020 18:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://tminecola.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>關於這裡, 還有我</title>
+      <link>https://tminecola.github.io/2020/03/%E9%97%9C%E6%96%BC%E9%80%99%E8%A3%A1-%E9%82%84%E6%9C%89%E6%88%91/</link>
+      <pubDate>Wed, 25 Mar 2020 18:00:00 +0800</pubDate>
+      
+      <guid>https://tminecola.github.io/2020/03/%E9%97%9C%E6%96%BC%E9%80%99%E8%A3%A1-%E9%82%84%E6%9C%89%E6%88%91/</guid>
+      <description>&lt;p&gt;「寫一個網站紀錄開發生活」是我大學時期的想法，推遲了許久終於真正開始了，接下來的日子我會將過去的技術筆記、開發心路歷程及值得分享的雜事慢慢紀錄在這裡，趁著剩餘一年多的時光，分享、紀錄與回憶，希望能讓自己與不小心點進來的人都有所成長&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
