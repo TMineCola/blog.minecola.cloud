@@ -1,0 +1,115 @@
+baseURL = "https://tminecola.github.io/"
+languageCode = "zh-tw"
+defaultContentLanguage = "zh-tw"
+title = "MineCola 開發日記"
+theme = "tranquilpeak"
+
+# Disqus 社群功能
+# disqusShortname = ""
+# Google 分析
+googleAnalytics = "UA-161796118-1"
+
+# 作者資訊
+[author]
+    name = "MineCola"
+    bio = "紀錄開發生活中的點點滴滴"
+    job = "MS Student, NTUST"
+    location = "Taipei, Taiwan"
+    picture = "/images/author/author.jpg"
+
+# 連結格式
+[permalinks]
+    post = "/:year/:month/:slug/"
+
+# 產生分類頁面
+[taxonomies]
+    tag = "tags"
+    category = "categories"
+    archive = "archives"
+
+# SideBar 設定
+[[menu.main]]
+    weight = 0
+    identifier = "home"
+    name = "Home"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
+    url = "/"
+[[menu.main]]
+    weight = 1
+    identifier = "archives"
+    name = "Archives"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
+    url = "/archives"
+[[menu.main]]
+    weight = 2
+    identifier = "categories"
+    name = "Categories"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
+    url = "/categories"
+[[menu.main]]
+    weight = 3
+    identifier = "tags"
+    name = "Tags"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
+    url = "/tags"
+[[menu.main]]
+    weight = 4
+    identifier = "about"
+    name = "About"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
+    url = "/#about"
+
+# 連結設定
+[[menu.links]]
+  weight = 0
+  identifier = "github"
+  name = "GitHub"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
+  url = "https://github.com/tminecola"
+
+# 文章右上角的區塊 (Default 大頭貼)
+[params.header.rightLink]
+  class = "open-algolia-search"
+  icon = "search"
+  url = "/#search"
+
+# 參數設定
+[params]
+    # 日期格式
+    dateFormat = "2006/01/02"
+    # 網站縮圖
+    favicon = "/favicon.png"
+    # 關鍵字
+    keywords = ["development", "開發", "devops", "backend", "technology"]
+    # 網站描述
+    description = "紀載著 TMineCola 的開發時光"
+    # 特殊字 High light
+    syntaxHighlighter = "prism.js"
+    # 文章隱藏 Side bar
+    clearReading = true
+    # 階層式標籤分類 (是否依據順序代表階層)
+    hierarchicalCategories = false
+    # 側邊攔顯示模式
+    sidebarBehavior = 1
+    # 封面照
+    coverImage = "images/sites/cover.jpg"
+    # 啟用相片廊 (特定標記的圖片會在文末用畫廊的方式顯示)
+    imageGallery = true
+    # 文章縮圖設定 (啟用/縮圖擺放位置/是否自動使用第一張圖片或封面作為縮圖)
+    thumbnailImage = true
+    thumbnailImagePosition = "right"
+    autoThumbnailImage = false
+    # 社群分享
+    [[params.sharingOptions]]
+        name = "Facebook"
+        icon = "fa-facebook-official"
+        url = "https://www.facebook.com/sharer/sharer.php?u=%s"
+
+    [[params.sharingOptions]]
+        name = "Twitter"
+        icon = "fa-twitter"
+        url = "https://twitter.com/intent/tweet?text=%s"
+
+# 避免阻擋原始 Html 標籤 
+[markup.goldmark.renderer]
+    unsafe= true
