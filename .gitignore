@@ -1,0 +1,26 @@
+# https://github.com/gohugoio/hugo/blob/master/.gitignore
+/hugo
+docs/public*
+/.idea
+hugo.exe
+*.test
+*.prof
+nohup.out
+cover.out
+*.swp
+*.swo
+.DS_Store
+*~
+vendor/*/
+*.bench
+*.debug
+coverage*.out
+
+dock.sh
+
+GoBuilds
+dist
+
+resources/sunset.jpg
+
+vendor
