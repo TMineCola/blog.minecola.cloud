@@ -22,7 +22,7 @@ script:
     - echo "$CNAME_URL" > public/CNAME
 
 after_script:
-  - bash ./Telegram_bot_alarm.sh
+  - bash ./Telegram_bot_alarm.sh &> /dev/null
 
 deploy:
     provider: pages
