@@ -1,7 +1,7 @@
 baseURL = "https://tminecola.github.io/"
 languageCode = "zh-tw"
 defaultContentLanguage = "zh-tw"
-title = "MineCola 開發日記"
+title = "MineCola's Blog | 開發筆記 & 雜談"
 theme = "tranquilpeak"
 
 # Disqus 社群功能
@@ -12,7 +12,7 @@ googleAnalytics = "UA-161796118-1"
 # 作者資訊
 [author]
     name = "MineCola"
-    bio = "紀錄開發生活中的點點滴滴"
+    bio = ""
     job = "MS Student, NTUST"
     location = "Taipei, Taiwan"
     picture = "/images/author/author.jpg"
@@ -77,7 +77,7 @@ googleAnalytics = "UA-161796118-1"
     # 關鍵字
     keywords = ["development", "開發", "devops", "backend", "technology"]
     # 網站描述
-    description = "紀載著 TMineCola 的開發時光"
+    description = "記載著一位開發者與他髒髒的雙手做過的事，偶爾會不小心卯起來認真寫技術筆記"
     # 特殊字 High light
     syntaxHighlighter = "prism.js"
     # 文章隱藏 Side bar
