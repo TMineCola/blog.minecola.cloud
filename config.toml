@@ -104,7 +104,10 @@ googleAnalytics = "UA-161796118-1"
         name = "Twitter"
         icon = "fa-twitter"
         url = "https://twitter.com/intent/tweet?text=%s"
+    # Footer 作者版權宣告的連結
+    [params.footer]
+        copyright = "<a href=\"https://github.com/tminecola\">MineCola</a>"
 
-# 避免阻擋原始 Html 標籤 
+# 避免阻擋原始 Html 標籤
 [markup.goldmark.renderer]
     unsafe= true
