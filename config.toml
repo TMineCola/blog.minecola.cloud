@@ -16,6 +16,7 @@ googleAnalytics = "UA-161796118-1"
     job = "MS Student, NTUST"
     location = "Taipei, Taiwan"
     picture = "/images/author/author.jpg"
+    email = "wang.minecola@gmail.com"
 
 # 連結格式
 [permalinks]
@@ -29,38 +30,31 @@ googleAnalytics = "UA-161796118-1"
 
 # SideBar 設定
 [[menu.main]]
-  weight = 1
-  identifier = "search"
-  name = "Search"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-search\"></i>"
-  url = "/#search"
-  class = "st-search-show-outputs"
-[[menu.main]]
-    weight = 2
+    weight = 1
     identifier = "archives"
     name = "Archives"
     pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
     url = "/archives"
 [[menu.main]]
-    weight = 3
+    weight = 2
     identifier = "categories"
     name = "Categories"
     pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
     url = "/categories"
 [[menu.main]]
-    weight = 4
+    weight = 3
     identifier = "tags"
     name = "Tags"
     pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
     url = "/tags"
 [[menu.main]]
-    weight = 5
+    weight = 4
     identifier = "about"
     name = "About"
     pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
     url = "/#about"
 [[menu.main]]
-    weight = 6
+    weight = 5
     identifier = "home"
     name = "Home"
     pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
@@ -73,12 +67,6 @@ googleAnalytics = "UA-161796118-1"
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
   url = "https://github.com/tminecola"
-
-# 文章右上角的區塊 (Default 大頭貼)
-[params.header.rightLink]
-  class = "open-algolia-search"
-  icon = "search"
-  url = "/#search"
 
 # 參數設定
 [params]
