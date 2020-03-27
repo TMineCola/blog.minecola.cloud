@@ -11,8 +11,8 @@ keywords:
 thumbnailImage: "縮圖路徑"
 thumbnailImagePosition: 縮圖位置(top/left/right)
 metaAlignment: 標題日期位置(left/right/center)
+
+draft: true
 ---
-
-
 
 <!--more-->

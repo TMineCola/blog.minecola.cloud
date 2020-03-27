@@ -12,5 +12,7 @@ comments:       false
 showMeta:       false
 showActions:    false
 #thumbnailImage: //example.com/image.jpg
+
+draft: true
 ---
 
