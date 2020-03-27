@@ -25,11 +25,11 @@ send_msg () {
 # characters, since they're reserved in bash
 send_msg "
 -------------------------------------
-Travis build *${build_status}!*
+Travis build *${build_status}*!
 \`Repository:  ${TRAVIS_REPO_SLUG}\`
 \`Branch:      ${TRAVIS_BRANCH}\`
 *Commit Msg:*
 ${TRAVIS_COMMIT_MESSAGE}
-[Job Log here](${TRAVIS_JOB_WEB_URL})
+[Job Log](${TRAVIS_JOB_WEB_URL}) --- [Website](https://tminecola.github.io)
 --------------------------------------
 "
