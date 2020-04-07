@@ -22,6 +22,7 @@ dock.sh
 GoBuilds
 dist
 
-resources/sunset.jpg
-
 vendor
+
+# Temp storage
+/temp
