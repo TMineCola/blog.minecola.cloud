@@ -20,7 +20,7 @@ googleAnalytics = "UA-161796118-1"
 
 # 連結格式
 [permalinks]
-    post = "/:year/:month/:slug/"
+    post = "/:year/:month/:filename/"
 
 # 產生分類頁面
 [taxonomies]
