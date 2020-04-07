@@ -12,7 +12,7 @@ googleAnalytics = "UA-161796118-1"
 # 作者資訊
 [author]
     name = "MineCola"
-    bio = "Don't blame others as an excuse for you not working hard enough."
+    bio = "朝向 DevOps 之路邁進的研究生，沿途常被各式各樣花枝招展的新技術吸引，把什麼都學什麼都碰的人生紀錄在這"
     job = "MS Student, NTUST"
     location = "Taipei, Taiwan"
     picture = "/images/author/author.jpg"
