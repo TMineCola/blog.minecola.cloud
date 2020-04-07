@@ -21,8 +21,11 @@ script:
     - hugo 2> /dev/null
     - echo "$CNAME_URL" > public/CNAME
 
-after_script:
-  - bash ./Telegram_bot_alarm.sh
+after_success:
+    - bash ./Telegram_bot_alarm.sh "success"
+
+after_failure:
+    - bash ./Telegram_bot_alarm.sh "failure"
 
 deploy:
     provider: pages

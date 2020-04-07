@@ -7,7 +7,7 @@ BOT_URL="https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"
 PARSE_MODE="Markdown"
 
 # Use built-in Travis variables to check if all previous steps passed:
-if [ $TRAVIS_TEST_RESULT -ne 0 ]; then
+if [[ $TRAVIS_TEST_RESULT -ne 0 ]] || [[ $1 == "failure" ]]; then
     build_status="failed"
 else
     build_status="succeeded"
