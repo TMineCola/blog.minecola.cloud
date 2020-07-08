@@ -8,10 +8,28 @@
     <language>zh-tw</language>
     <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
     <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
-    <lastBuildDate>Wed, 25 Mar 2020 18:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 18:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://tminecola.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Alternate Reality Game</title>
+      <link>https://tminecola.github.io/tags/alternate-reality-game/</link>
+      <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
+      <author>wang.minecola@gmail.com (MineCola)</author>
+      <guid>https://tminecola.github.io/tags/alternate-reality-game/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MOLi Activity</title>
+      <link>https://tminecola.github.io/tags/moli-activity/</link>
+      <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
+      <author>wang.minecola@gmail.com (MineCola)</author>
+      <guid>https://tminecola.github.io/tags/moli-activity/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>About Me</title>

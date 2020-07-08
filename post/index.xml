@@ -8,10 +8,28 @@
     <language>zh-tw</language>
     <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
     <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
-    <lastBuildDate>Wed, 25 Mar 2020 18:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2020 18:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://tminecola.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>不靠海的校園實境解謎活動 - Lost</title>
+      <link>https://tminecola.github.io/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</link>
+      <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
+      <author>wang.minecola@gmail.com (MineCola)</author>
+      <guid>https://tminecola.github.io/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</guid>
+      <description>簡單來說這是一款「以國立暨南國際大學校園為背景的實境解謎遊戲」，也是我在暨大的最後一個學期協助 MOLi 舉辦，首次與其他社團共同聯名推出的活動，趁著記憶還沒被抹去之前回顧一下這個活動，順便把一些心得與遺憾都記錄下來，或許對於未來的活動舉辦會有所幫助。
+活動 起源 這個活動起源於 @UncleHanWei ，一位目前仍常駐在 MOLi 實驗室的地頭蛇，完整的來龍去脈已經記不得了，依稀是有剩餘的經費想要趁還有人想舉辦活動的時候趕緊把他花掉，再依照我們的相處模式應該會長這樣：
+{% blockquote @UncleHanWei %} 不然就來辦場解謎啊 {% endblockquote %} {% blockquote @MineCola %} 來啊！辦啊！ {% endblockquote %}
+諸如此類的，總之 MOLi 一直以來的風格大概也都像是這樣，說幹就幹，或許這是一種文化？還是前輩們的傳承？無論如何展開了一個奇妙的活動，而合作夥伴 MysC(推理同好社) 則是因為有認識的學妹過去在裡面擔任社長，也跟這個活動的內容有著一定的相關性，所以經過一番接洽就拉進來了。
+概念 參考了各種大大小小的解謎，涵蓋了實境解謎、密室逃脫、解謎網頁與老高的影片，我們想著要搞出一個結合網頁技術的實境解謎遊戲，結合故事主題能夠來個虛擬與實體的整合，玩家必須穿梭於「虛擬(網頁)」及「實體(校園)」之間來串連線索並且解開故事的謎底。
+ 關於故事 簡介 事情從收到一封神秘的信開始，基於好奇，各位決定踏入尋找答案的旅途，意外的與即將消失的 “王翰同” 產生了連結，揭開了這個世界運作的面紗，並從旁拯救了他。
+關卡 整個故事分成七段，每一段都有其對應的謎題與線索，以及最開始的楔子與最後的結局，文章中只會提到一小部分題目及構想方式，而詳細的故事與解謎流程可以參考：釋出的活動解答。
+報名關卡 一開始活動資訊公布在學校的臉書社團中，而並未提供任何報名連結，我們用一個拼圖的概念，將一張報名資訊切割成九塊拼圖，並且交由九個工作人員將頭貼更換成其中某一塊，當初一開始構想是讓九位隨機在活動資訊文下方留言，但又怕太困難沒有人願意報名，因此用了一招類似 Link List 的方法：互相標記，透過互相標記的方法讓大家注意到我們的頭貼，因而解開報名資訊，結果發現太簡單了&amp;hellip;真是失策。
+楔子 活動開始當天的零時零分會透過學校 SMTP Server 來發送郵件，包含楔子和第一道謎題，而這個部分很有趣，當初會使用 Email 來做為管道是因為&amp;hellip;去年的暨大 SMTP Server 25 Port 是只要學校內網都可以隨便發送的，然後今年測試是有鎖起來了，蠻有趣的一個體驗，而且學校的 Server 針對大量的發信還是會擋，當時我是用 Random 等待時間的方式去發送，現在想起來應該做個簡單的 Queue 就能解決。
+第一關 前面楔子解完會得到一個 地點(圖片解) 和 教室編號(連結解)，會引導至學生活動中心 403，而這個 403 當初想到與 HTTP Code 的 Forbidden 代號有所關聯，就復刻了一個 Nginx 自帶的 403 頁面並且加上反白文字來提示玩家這並不是原生的頁面，而重點是在於這個地點可以獲得一張精心設計的偽學生證卡片。</description>
+    </item>
     
     <item>
       <title>關於這裡, 還有我</title>
