@@ -8,14 +8,17 @@ dist: bionic
 # before_install
 # install - install any dependencies required
 install:
-    - sudo apt-get install hugo
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.73.0/hugo_0.73.0_Linux-64bit.deb
+    - sudo dpkg -i hugo_0.73.0_Linux-64bit.deb
+    - sudo rm hugo_0.73.0_Linux-64bit.deb
+    - sudo hugo version
 
 before_script:
     - rm -rf public 2> /dev/null
 
 # script - run the build script
 script:
-    - hugo 2> /dev/null
+    - sudo hugo 2> /dev/null
     - echo "$CNAME_URL" > public/CNAME
 
 after_success:
