@@ -8,7 +8,7 @@ dist: bionic
 # before_install
 # install - install any dependencies required
 install:
-    - apt-get install hugo
+    - sudo apt-get install hugo
 
 before_script:
     - rm -rf public 2> /dev/null
