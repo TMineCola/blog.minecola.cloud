@@ -24,10 +24,11 @@ showPagination: true
 
 這個活動起源於 [@UncleHanWei](https://github.com/UncleHanWei) ，一位目前仍常駐在 MOLi 實驗室的地頭蛇，完整的來龍去脈已經記不得了，依稀是有剩餘的經費想要趁還有人想舉辦活動的時候趕緊把他花掉，再依照我們的相處模式應該會長這樣：
 
-{{< blockquote @UncleHanWei >}}
+{{< blockquote "@UncleHanWei" >}}
 不然就來辦場解謎啊
 {{< /blockquote >}}
-{{< blockquote @MineCola >}}
+
+{{< blockquote "@MineCola" >}}
 來啊！辦啊！
 {{< /blockquote >}}
 
