@@ -19,7 +19,9 @@ before_script:
 # script - run the build script
 script:
     - sudo hugo 2> /dev/null
-    - sudo echo "$CNAME_URL" > public/CNAME
+    - mkdir public
+    - cd public
+    - echo "$CNAME_URL" > public/CNAME
 
 after_success:
     - bash ./Telegram_bot_alarm.sh "success"
