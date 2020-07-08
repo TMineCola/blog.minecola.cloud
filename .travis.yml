@@ -4,14 +4,14 @@
 # https://docs.travis-ci.com/user/deployment/pages/
 
 dist: bionic
-language: go
-go:
-    - master
 
 # before_install
 # install - install any dependencies required
 install:
-    - go get github.com/gohugoio/hugo
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.73.0/hugo_0.73.0_Linux-64bit.deb
+    - sudo dpkg -i hugo_0.73.0_Linux-64bit.deb
+    - sudo rm hugo_0.73.0_Linux-64bit.deb
+    - sudo hugo version
 
 before_script:
     - rm -rf public 2> /dev/null
