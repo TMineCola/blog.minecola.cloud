@@ -4,6 +4,8 @@ date: 2020-07-07T18:00:00+08:00
 modified: 2020-07-21T12:00:00+08:00
 thumbnailImage: "/images/2020/07/07/lost-logo.jpg"
 thumbnailImagePosition: left
+categories:
+- 活動
 tags:
 - MOLi Activity
 - Alternate Reality Game
