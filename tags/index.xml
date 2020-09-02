@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</title>
-    <link>https://tminecola.github.io/tags/</link>
+    <link>https://blog.minecola.tw/tags/</link>
     <description>Recent content in Tags on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
@@ -10,33 +10,33 @@
     <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
     <lastBuildDate>Tue, 07 Jul 2020 18:00:00 +0800</lastBuildDate>
     
-	<atom:link href="https://tminecola.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.minecola.tw/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Alternate Reality Game</title>
-      <link>https://tminecola.github.io/tags/alternate-reality-game/</link>
+      <link>https://blog.minecola.tw/tags/alternate-reality-game/</link>
       <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://tminecola.github.io/tags/alternate-reality-game/</guid>
+      <guid>https://blog.minecola.tw/tags/alternate-reality-game/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MOLi Activity</title>
-      <link>https://tminecola.github.io/tags/moli-activity/</link>
+      <link>https://blog.minecola.tw/tags/moli-activity/</link>
       <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://tminecola.github.io/tags/moli-activity/</guid>
+      <guid>https://blog.minecola.tw/tags/moli-activity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>About Me</title>
-      <link>https://tminecola.github.io/tags/about-me/</link>
+      <link>https://blog.minecola.tw/tags/about-me/</link>
       <pubDate>Wed, 25 Mar 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://tminecola.github.io/tags/about-me/</guid>
+      <guid>https://blog.minecola.tw/tags/about-me/</guid>
       <description></description>
     </item>
     
