@@ -1,7 +1,7 @@
 ---
 title: "不靠海的校園實境解謎活動 - Lost"
 date: 2020-07-07T18:00:00+08:00
-modified: 2020-07-21T12:00:00+08:00
+modified: 2021-01-05T18:00:00+08:00
 thumbnailImage: "/images/2020/07/07/lost-logo.jpg"
 thumbnailImagePosition: left
 categories:
@@ -20,7 +20,7 @@ showPagination: true
 
 <!--more-->
 
-# 活動
+# 關於活動
 
 ## 起源
 
