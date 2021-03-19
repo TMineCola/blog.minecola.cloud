@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>歷程 on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</title>
+    <link>https://blog.minecola.tw/categories/%E6%AD%B7%E7%A8%8B/</link>
+    <description>Recent content in 歷程 on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
+    <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
+    <lastBuildDate>Wed, 25 Mar 2020 18:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.minecola.tw/categories/%E6%AD%B7%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>關於這裡, 還有我</title>
+      <link>https://blog.minecola.tw/2020/03/about-site-and-author/</link>
+      <pubDate>Wed, 25 Mar 2020 18:00:00 +0800</pubDate>
+      <author>wang.minecola@gmail.com (MineCola)</author>
+      <guid>https://blog.minecola.tw/2020/03/about-site-and-author/</guid>
+      <description>&lt;p&gt;「寫一個網站紀錄開發生活」是我大學時期的想法，推遲了許久終於真正開始了，接下來的日子我會將過去的技術筆記、開發心路歷程及值得分享的雜事慢慢紀錄在這裡，趁著剩餘一年多的時光，分享、紀錄與回憶，希望能讓自己與不小心點進來的人都有所成長&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
