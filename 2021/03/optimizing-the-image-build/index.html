@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.73.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="MineCola">
+<meta name="keywords" content="Dockerfile, Image, 最佳化, development, 開發, devops, backend, technology">
+<meta name="description" content="最近在產學合作的專案當中實作許多 Infra[1] 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。">
+
+
+<meta property="og:description" content="最近在產學合作的專案當中實作許多 Infra[1] 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerfile 撰寫與 Image 最佳化心得">
+<meta name="twitter:title" content="Dockerfile 撰寫與 Image 最佳化心得">
+<meta property="og:url" content="https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+<meta property="twitter:url" content="https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+<meta property="og:site_name" content="MineCola&#39;s Blog | 開發筆記 &amp; 雜談">
+<meta property="og:description" content="最近在產學合作的專案當中實作許多 Infra[1] 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。">
+<meta name="twitter:description" content="最近在產學合作的專案當中實作許多 Infra[1] 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。">
+<meta property="og:locale" content="zh-tw">
+
+  
+    <meta property="article:published_time" content="2021-03-19T08:00:00">
+  
+  
+    <meta property="article:modified_time" content="2021-03-19T08:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="容器化技術">
+    
+  
+  
+    
+      <meta property="article:tag" content="Optimize">
+    
+      <meta property="article:tag" content="Dockerfile">
+    
+      <meta property="article:tag" content="Image">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://blog.minecola.tw/images/2021/03/20/docker.jpg">
+  <meta property="twitter:image" content="https://blog.minecola.tw/images/2021/03/20/docker.jpg">
+
+
+
+
+
+  <meta property="og:image" content="https://blog.minecola.tw/images/author/author.jpg">
+  <meta property="twitter:image" content="https://blog.minecola.tw/images/author/author.jpg">
+
+
+    <title>Dockerfile 撰寫與 Image 最佳化心得</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-2vbtemisys3iemudl3stbavlz4c85rb6zez8s4hjn75tlc31bjbeshg3avyb.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-161796118-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">MineCola&#39;s Blog | 開發筆記 &amp; 雜談</a>
+  </div>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://blog.minecola.tw/images/author/author.jpg" alt="作者的圖片" />
+        </a>
+        <h4 class="sidebar-profile-name">MineCola</h4>
+        
+          <h5 class="sidebar-profile-bio">朝向 DevOps 之路邁進的研究生，沿途常被各式各樣花枝招展的新技術吸引，把什麼都學什麼都碰的人生紀錄在這</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">所有文章</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分類</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">標籤</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">關於</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首頁</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/tminecola" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Dockerfile 撰寫與 Image 最佳化心得
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-03-19T08:00:00&#43;08:00">
+        
+  
+  
+  
+  
+    2021/03/19
+  
+
+      </time>
+    
+    
+  
+  
+    <span>分類</span>
+    
+      <a class="category-link" href="/categories/%e5%ae%b9%e5%99%a8%e5%8c%96%e6%8a%80%e8%a1%93">容器化技術</a>
+    
+  
+
+    <span>｜大概要看 20 分鐘</span>
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>最近在產學合作的專案當中實作許多 Infra<sup>[1]</sup> 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。</p>
+<hr>
+<p>在 Docker development best practices<sup>[Ref 3]</sup> 中有提到四個要點，分別是：</p>
+<ol>
+<li>知道如何保持 Image 最小化</li>
+<li>了解在何處與如何儲存應用程式資料</li>
+<li>使用 CI/CD 來測試與部署</li>
+<li>區分開發與正式環境的實務方式</li>
+</ol>
+<p>這篇主要是針對第一點來分享，並透過 Image 最小化來降低儲存空間、減少流量花費同時加快其載入速度，像在專案中客戶是使用 IBM Cloud 的虛擬主機服務，流量每一分一毫都是要付費的，因此協助他們減少開支也是我們開發者的任務之一，同時也能夠加快我們 Deploy 新版本的效率。</p>
+<p>其實看完資料整理的時候才發現 Image 最佳化這件事情其實學問不深卻非常實用，整理同時也檢討自己專案並發現有許多可以改善的地方，可以說是一舉兩得，而基本上由於 Docker 本身也是遵循 Open Container Initiative (OCI)<sup>[2]</sup> 因此這篇文章也通用於 Podman 或 Buildah 等遵循 OCI 的開源專案。</p>
+<hr>
+<ul>
+<li><sup>[1]</sup> Infra：為基礎設施 Infrastructure 的簡稱，在資訊相關單位通常是指協助開發、營運行為及產品服務的基礎系統及硬體</li>
+<li><sup>[2]</sup> Open Container Initiative (OCI)：開放的容器管理架構，目的是為了使不同容器應用系統開發商能夠有一致的介面，促進容器化的流通使用</li>
+</ul>
+<hr>
+<h2 id="dockerfile">Dockerfile</h2>
+<p>Dockerfile 是一個以文字描述如何自動化建構 Image 的檔案，通常在開源專案中很常看見使用來協助使用者快速建構適合執行該專案應用程式的 Image，裡面會描述從哪一個基本的 Image 開始建構、中間需要複製什麼檔案執行那些指令&hellip;直到最後應用程式啟動的流程，如果使用者不想使用容器化的佈署方式，透過參考 Dockerfile 也能夠了解其應用程式要如何安裝並且啟動。</p>
+<h3 id="指令介紹">指令介紹</h3>
+<blockquote>
+<p>主要參考 <a href="https://docs.docker.com/engine/reference/builder/">Dockerfile Reference</a>，詳細撰寫方式可以參考這邊</p>
+</blockquote>
+<h5 id="from">FROM</h5>
+<p>簡單來說就是挑選你要以哪個 Image 為基礎向上延伸，例如開發 Java 應用程式可能就會使用 <a href="https://hub.docker.com/_/openjdk">OpenJDK</a> 的 Image 來進行建構，如此一來描述就會像是 <code>FROM openjdk:8</code>，當然也可以使用自己產生的 Image 來延伸。</p>
+<h5 id="label">LABEL</h5>
+<p>用來針對建構好的 Image 進行標籤，例如：<code>LABEL module.auth.version=&quot;0.0.1&quot;</code>，複數個標籤可以用單行空白隔開標籤 <code>LABEL A=1 B=2</code>，或一行一行宣告的方式來標籤，透過標籤的方式能夠更快速透過 <code>--filter</code> 來找到對應的單一或群組的 Image，當然標籤功能不僅限於 Image，在其他像是 Container、Network 或 Volume 上都有相同的功能可以產生 <a href="https://docs.docker.com/config/labels-custom-metadata/">Object labels</a> 來方便尋找及管理。</p>
+<h5 id="run">RUN</h5>
+<p>如同在 Shell 中下指令般，用於建構 Image 的環境， <code>RUN</code> 可以協助執行複雜的指令並且能夠透過反斜線 <code>\</code> 來將指令分割成多行，提高可讀、可維護性，例如像 Docker 官方文件中提供的範例：</p>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>RUN example</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">RUN apt-get update &amp;&amp; apt-get install -y \
+    aufs-tools \
+    automake \
+    build-essential \
+    curl \
+    dpkg-sig \
+    libcap-dev \
+    libsqlite3-dev \
+    mercurial \
+    reprepro \
+    ruby1.9.1 \
+    ruby1.9.1-dev \
+    s3cmd=1.1.* \
+&amp;&amp; rm -rf /var/lib/apt/lists/*</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p>這邊要特別注意的是 <code>RUN</code> 並不會拿來執行最後想要啟動的應用程式，如果要啟動應用程式則需要使用後面提到的 <code>CMD</code> 或 <code>ENTRYPOINT</code>。</p>
+<p><div class="alert info ">
+  <p>Debian Ubuntu 官方 image 會自動執行 <code>apt clean</code></p>
+</div>
+<div class="alert warning ">
+  <p><p>Docker Image 建構時預設使用 /bin/sh -c 執行，因此只要最後一個成功就會當作成功，所以 Pipe 失敗的行為可以用 <code>set -o pipefail &amp;&amp;</code> 來檢查，舉例來說：</p>
+<pre><code>RUN set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number
+</code></pre><p>而有些 Image 可能預設的 Shell 不支援 -o pipefail 因此建議使用</p>
+<pre><code>RUN [&quot;/bin/bash&quot;, &quot;-c&quot;, &quot;set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number&quot;]
+</code></pre></p>
+</div></p>
+<h5 id="cmd">CMD</h5>
+<p>主要用於運行應用程式並且允許附帶任意參數，與稍後提到的 <code>ENTRYPOINT</code> 非常類似，但 <code>CMD</code> 可以理解成「預設的啟動指令」，基本上用法就是 <code>CMD [&quot;應用程式&quot;, &quot;參數一&quot;, &quot;參數二&quot;…]</code>，像是以 Java 執行 Jar file 為例就會是：<code>CMD [&quot;java&quot;, &quot;-jar&quot;, &quot;app.jar&quot;]</code> 來表示 <code>java -jar app.jar</code> 這個指令。</p>
+<h5 id="expose">EXPOSE</h5>
+<p>用來指定這個 Image 產生的 Container 允許其他 Container 以哪一個 Port 來連接，如果要與 Host 端連接則需要用 <code>-p</code> 的方式來指定，例如像： <code>-p 8080:80</code> 就是將外面 Host 端的 8080 Port 導到 Container 的 80 Port 上，而 Expose 則是只有事先指定其他 Container 能以哪個 Port 來存取而已。</p>
+<h5 id="env">ENV</h5>
+<p>基本上就跟平常在 Shell 中宣告環境變數一樣，如果不想讓環境變數殘留在建構好的 Image 中（包含建構中的任何一層）則官方建議的寫法會如下：</p>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>Example for remove env variable</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">FROM alpine
+RUN export VERSION=&#34;1.0.0&#34; \
+    &amp;&amp; echo $VERSION &gt; ./version \
+    &amp;&amp; unset VERSION
+CMD sh</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p>透過這樣的方式來確保最後產生的 Image 是不會具有 VERSION 的環境變數，但是如果將 <code>ENV</code> 與 <code>unset</code> 分成兩個步驟來寫，則 ENV 那一層會保留著環境變數，直到 unset 層才會被移除。</p>
+<h5 id="add--copy">ADD / COPY</h5>
+<p>這兩個標籤功能極為類似，主要都是將檔案從本機或先前建構的環境中複製到當前執行的環境底下，許多開源專案一不小心還會交錯使用，但文件裡寫道：「一般來說 <code>COPY</code> 為首選」，而 <code>ADD</code> 有什麼特別的呢？基本上可以參考<a href="https://docs.docker.com/engine/reference/builder/#add">文件</a>裡面也有詳細描述 ADD 所遵循的規則，主要是複製對象如果是常見的壓縮格式 (identity, gzip, bzip2 或 xz) 則會將其解壓縮成目錄，也可以於來源指定遠端的 URL，但若 URL 下載下來為常見壓縮格式則不會主動解壓縮。</p>
+<p>除了從本機將檔案複製到當前環境底下之外，也可以從先前建構的環境底下複製，像是下面以 Java 應用程式打包為例，透過標記先前的建構 <code>gradle:6.4.0-jdk8</code> 取名為 <code>build</code> 後再當前環境將前一個環境中編譯好的 jar file 複製進來。</p>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>Dockerfile / Build for Java application</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">FROM gradle:6.4.0-jdk8 AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build
+
+FROM openjdk:8-jre-slim
+EXPOSE 4300
+RUN mkdir /app
+
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/myService.jar</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<h5 id="entrypoint">ENTRYPOINT</h5>
+<p>設定 Image 中主要應用程式的進入點，通常會將固定不太會變動的部分放在 <code>ENTRYPOINT</code> 中，而會動態變化的則會建議以 <code>CMD</code> 附加在其後，可以參考下面藍色提示框中更詳細的說明。</p>
+<h5 id="volume">VOLUME</h5>
+<p>指定需要針對哪個目錄進行掛載動作，會產生一個 Docker volume 來對指定的目錄進行掛載，如此一來資料就能被保存於 Docker volumn 之中</p>
+<h5 id="user">USER</h5>
+<p>用來指定要執行後續動作的使用者與群組。</p>
+<h5 id="workdir">WORKDIR</h5>
+<p>可以視為切換當前目錄，通常會寫絕對路徑來指定到特定目錄底下，相對目錄要特別注意，如果照下方的方式撰寫 (取自官方範例)：</p>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>Example for workdir</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p>這樣你執行 pwd (取得當前目錄) 會是出現 <code>/a/b/c</code></p>
+<h5 id="onbuild">ONBUILD</h5>
+<p>這個指令很特別，是用於當其他人以你建構出來的這個 Image 為基礎去建構的時候才會執行 ONBUILD 後面指令，而 ONBUILD 後面是可以指定其他例如像是 <code>COPY</code> 或是 <code>RUN</code> 的指令。</p>
+<h5 id="arg">ARG</h5>
+<p>用於建構時指定變數，使用時可以在 <code>docker build &lt;path&gt;</code> 後加上 <code>--build-arg</code> 帶入對應的參數與參數值。</p>
+<h5 id="healthcheck">HEALTHCHECK</h5>
+<p>使 Docker 以指定方法進行容器的健康(正常運作)檢查，例如像是 Web Server 就可以使用 <code>HEALTHCHECK --interval=5m --timeout=3s \ CMD curl -f http://localhost/ || exit 1</code> 的方式來確保是否有正常運作</p>
+<h5 id="shell">SHELL</h5>
+<p>可以使用指定的 SHELL 來執行指令。</p>
+<hr>
+<h4 id="run-vs-cmd-vs-entrypoint">RUN vs CMD vs ENTRYPOINT</h4>
+<div class="alert info ">
+  <p><p>針對比較容易搞混的 RUN / CMD / ENTRYPOINT 在這邊特別提出來做比較，當初自己在參考別人的 Dockerfile 時也常常看到各種方法混用及誤用，在這次順便整理成一個比較好理解的表格</p>
+<table>
+<thead>
+<tr>
+<th>RUN</th>
+<th>CMD</th>
+<th>ENTRYPOINT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用於建構環境</td>
+<td>作為預設的啟動(參數)或互動指令，可以在啟動時取代</td>
+<td>作為主要應用程式的進入點，無法再啟動時取代</td>
+</tr>
+</tbody>
+</table>
+<p>基於上述表格與官方文件提到的 Best pratice 以 Java 應用程式為例，則可以想像成 <code>ENTRYPOINT</code> 為 <code>java -jar myService.jar</code>，而 <code>CMD</code> 為 <code>-env=production</code>，而在這樣的編寫之下當啟動容器時可以透過指令的方式去覆寫後面的環境變數 <code>-env=production</code> 來使容器可以更為彈性的使用。</p>
+</p>
+</div>
+<p>如果還是不太理解的話，這裡有一個小範例可以讓大家嘗試看看，先寫一個 dockerfile 在當前目錄，並且執行後面的指令來觀察看看結果：</p>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>Dockerfile</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">FROM alpine:3.12.4
+ENTRYPOINT [&#34;ls&#34;]
+CMD [&#34;-la&#34;, &#34;/&#34;]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>bash / Add sudo if you need</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">docker build --tag test/1 .
+docker run test/1
+docker run test/1 /
+docker run test/1 -alh /</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p>
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-33" >
+  
+    <a class="fancybox" href="/images/2021/03/20/result_entrypoint_cmd_1.jpg" title="run test/1" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/result_entrypoint_cmd_1.jpg" style="height: 200px;" alt="run test/1">
+  
+    </a>
+  
+   
+    <span class="caption">run test/1</span>
+  
+</div>
+
+
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-33" >
+  
+    <a class="fancybox" href="/images/2021/03/20/result_entrypoint_cmd_2.jpg" title="run test/1 /" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/result_entrypoint_cmd_2.jpg" style="height: 200px;" alt="run test/1 /">
+  
+    </a>
+  
+   
+    <span class="caption">run test/1 /</span>
+  
+</div>
+
+
+ 
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-33" >
+  
+    <a class="fancybox" href="/images/2021/03/20/result_entrypoint_cmd_3.jpg" title="run test/1 -alh /" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/result_entrypoint_cmd_3.jpg" style="height: 200px;" alt="run test/1 -alh /">
+  
+    </a>
+  
+   
+    <span class="caption">run test/1 -alh /</span>
+  
+</div>
+
+  <div style="clear:both;"></div>
+</p>
+<p>如此一來是不是就可以將 <code>ls</code> 作為主要程式的進入點，並且可以隨需求調整後面的參數了呢？兩者切割的好彈性沒煩擾 XD</p>
+<hr>
+<h2 id="image">Image</h2>
+<p>大概理解 Dockerfile 的各項標籤執行的內容後，就要來看看 Image 是如何產生的？簡而言之就是使用 <code>docker build .</code> 之後，會依據 Dockerfile 中描述的各項指令去逐行執行，並且只要執行上述任意一個指令便會產生一個中間過渡層 &ldquo;Layer&rdquo;，這也就是為什麼常常聽到 Image 是一層一層疊上去的，可以想像每個 Layer 都是一個 Check point，這樣的機制可以使得相同的任務可以節省執行時間與運算成本，每個 Layer 產生後都會依據指令內容給予一個 ID，像是可以看到圖片中就產生了三個 Layer，而每一層都會有屬於自己的編號。</p>
+
+ 
+  
+  
+  
+  
+    
+      
+    
+  
+    
+  
+
+
+<div class="figure center" >
+  
+    <img class="fig-img" src="/images/2021/03/20/result_build.jpg"  alt="執行結果 (使用前面的 ls -la / Dockerfile)">
+  
+   
+    <span class="caption">執行結果 (使用前面的 ls -la / Dockerfile)</span>
+  
+</div>
+
+  <div style="clear:both;"></div>
+
+<h3 id="最佳化策略">最佳化策略</h3>
+<blockquote>
+<p>參考 <a href="https://cloud.google.com/solutions/best-practices-for-building-containers/#build-the-smallest-image-possible">Google - Best practices for building containers</a></p>
+</blockquote>
+<ol>
+<li>確認環境需求並使用最符合環境的基礎 Image (Use the smallest base image possible)</li>
+<li>降低無意義的 Layer 層數 (Reduce the amount of clutter in your image)</li>
+<li>盡量使 Layer 可以共用 (Try to create images with common layers)</li>
+</ol>
+<p>第一點主要是在於許多人會<span class="highlight-text danger">隨便找一個可用的 Image 以其作為基礎</span>或著是說<span class="highlight-text danger">將建構環境直接拿來執行應用程式</span>都是大忌，換句話說你只是要執行一個簡單的 1 + 1 = ? 的計算過程，何必需要使用工程計算機呢？</p>
+<p>換個實際的例子，在專案中前端 (Angular) 曾經拿 Node.js 的環境執行 <code>npm install</code> 然後直接 <code>ng serve</code> 以測試的內建 Web Server 來打包這個前端環境，因此我們得到了一個肥滋滋的 1.X GB Image，但是如果將 <code>ng build</code> (也就是將 Angular 的程式全部打包成 html, css 與 js) 後，以大家熟悉的 Nginx Image(FROM nginx:alpine) 來打包的話，就能獲得一個 35 MB 不到的 Image，是不是很驚人？如果沒有特別需求，以更精簡的 Web Server 打包應該能夠再壓更低呢～</p>
+<p>其中二跟三是需要取捨的，有時候為了能讓 Layer 能夠共用則必須把指令切割細一點，這部分需要考驗大家切的經驗與能力了，主要可以跟大家分享的建議是指令可以一次性使用 RUN 來完成，不必要產生過多的 Layer，畢竟每個 Layer 執行都會花額外的ㄧ些時間，可以看看參考文章裡的比較表：</p>
+
+ 
+  
+  
+  
+  
+    
+      
+    
+  
+    
+  
+
+
+<div class="figure center" >
+  
+    <img class="fig-img" src="/images/2021/03/20/comparison_from_google.jpg"  alt="參考文章中的比較圖">
+  
+   
+    <span class="caption">參考文章中的比較圖</span>
+  
+</div>
+
+  <div style="clear:both;"></div>
+
+<h3 id="lab---實測-cache-機制">Lab - 實測 Cache 機制</h3>
+<p>為了能夠更了解文件中提到的指令對應的 Cache 行為，因此透過一個小實驗來加深印象，主要流程是會透過兩個檔案來確定 Cache 的 Layer 影響範圍</p>
+<h4 id="環境">環境</h4>
+<ul>
+<li>
+<p>Ubuntu 18.04.5 LTS</p>
+</li>
+<li>
+<p>Client: Docker Engine - Community</p>
+<blockquote>
+<p>Version:           20.10.2</p>
+</blockquote>
+<blockquote>
+<p>API version:       1.40</p>
+</blockquote>
+</li>
+<li>
+<p>Server: Docker Engine - Community</p>
+<blockquote>
+<p>Version:          19.03.14</p>
+</blockquote>
+<blockquote>
+<p>API version:      1.40 (minimum version 1.12)</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="實作-lab">實作 (Lab)</h4>
+<p>首先我們會準備下面的 Dockerfile 與一個檔案 &ldquo;A&rdquo; 裡面寫 123，然後進行建構，如果自己嘗試時遇到 Permission Denied 可以自行在所有 docker 指令前面加上 sudo 哦！</p>
+<ol>
+<li>第一次建構 <code>docker build . --tag test</code></li>
+</ol>
+<blockquote>
+<p><code>--tag test</code> 指的是要將建構好的 image 標記成 test:latest 方便未來使用</p>
+</blockquote>
+<blockquote>
+<p>如果想執行看看可以使用指令：<code>docker run test</code></p>
+</blockquote>
+
+  
+    
+  
+  
+  
+  
+
+
+<figure class="highlight  language-">
+  <figcaption>
+    
+      <span>Dockerfile</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-"><code class="">FROM ubuntu:focal
+RUN apt-get update &amp;&amp; apt-get install -y \
+    vim \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+COPY ./A /
+
+USER root
+
+ENTRYPOINT [&#34;cat&#34;, &#34;/A&#34;]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<ol start="2">
+<li>更改 A 檔案後重新建構 <code>docker build . --tag test</code></li>
+</ol>
+<p>
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-50" >
+  
+    <a class="fancybox" href="/images/2021/03/20/first_run_1.jpg" title="圖一、第一次建構 (前半部)" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/first_run_1.jpg" style="height: 100%;" alt="圖一、第一次建構 (前半部)">
+  
+    </a>
+  
+   
+    <span class="caption">圖一、第一次建構 (前半部)</span>
+  
+</div>
+
+
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-50" >
+  
+    <a class="fancybox" href="/images/2021/03/20/first_run_2.jpg" title="圖二、第一次建構 (後半部)" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/first_run_2.jpg" style="height: 100%;" alt="圖二、第一次建構 (後半部)">
+  
+    </a>
+  
+   
+    <span class="caption">圖二、第一次建構 (後半部)</span>
+  
+</div>
+
+
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-100" >
+  
+    <a class="fancybox" href="/images/2021/03/20/first_run_repeat.jpg" title="圖三、再跑一次第一次建構" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/first_run_repeat.jpg"  alt="圖三、再跑一次第一次建構">
+  
+    </a>
+  
+   
+    <span class="caption">圖三、再跑一次第一次建構</span>
+  
+</div>
+
+
+ 
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-100" >
+  
+    <a class="fancybox" href="/images/2021/03/20/second_run.jpg" title="圖四、更改 A 檔案後重新建構" data-fancybox-group="">
+  
+    <img class="fig-img" src="/images/2021/03/20/second_run.jpg"  alt="圖四、更改 A 檔案後重新建構">
+  
+    </a>
+  
+   
+    <span class="caption">圖四、更改 A 檔案後重新建構</span>
+  
+</div>
+
+  <div style="clear:both;"></div>
+</p>
+<p>透過上面小小的 Lab 可以發現第一次建構時會逐行指令進行操作 (如上圖一、圖二)，建構完畢後重新建構一次會發現它都有找到對應的 Layer cache 因此就直接使用他們 (如上圖三)，接著修改檔案 A 之後，會看到 <code>Step 3</code> 之後都重新執行了 (如上圖四)，原因是因為 A 檔案有做過修改，因此透過 Docker 雜湊校驗的機制發現有所更動，因此就重新建構這一步往後的所有指令了，而這邊也能看到其實 <code>RUN</code> 的部分只要指令沒有更動，是不會主動去更新的哦！</p>
+<div class="alert info ">
+  <p><p>如果想看一個 image 建構過程產生的所有 Layer 可以使用指令：</p>
+<pre><code>docker history &lt;image name&gt;
+</code></pre><p>來查看建構的歷程，以我們 Lab 舉例的話就是使用</p>
+<pre><code>docker history test
+</code></pre></p>
+</div>
+<h2 id="經驗提醒">經驗提醒</h2>
+<blockquote>
+<p>這邊基本上是想到或遇到就來補充 XD</p>
+</blockquote>
+<ol>
+<li>像是常見的 <code>RUN apt update</code> 這類的指令並不是每次 Build 就會幫你重新下載更新，而是只要指令沒有變動則有舊的 Cache 就使用舊的，所以對此如果想要進行更新的話通常會在 <code>build</code> 後面加上參數 <code>--no-cache</code>，來讓該次的建構不使用 Cache Layer。</li>
+<li>建構環境與執行環境可以分開，不一定要在建構環境中直接執行應用程式，同時也可以降低 Image 大小</li>
+<li>注意過程中有無暫存檔案，像是 <code>apt update</code> 後就會產生一些暫存資料，而這些在 Image 當中也只是佔空間而已，因此通常都會在額外加上 <code>apt-get -y clean &amp;&amp; rm -rf /var/lib/apt/lists/*</code> 這類的清除暫存操作 (官方的 Debian 與 Ubuntu Image 會自動執行 apt clean)</li>
+</ol>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><sup>[Ref 1]</sup> <a href="https://cloud.google.com/solutions/best-practices-for-building-containers/">https://cloud.google.com/solutions/best-practices-for-building-containers/</a></li>
+<li><sup>[Ref 2]</sup> <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/</a></li>
+<li><sup>[Ref 3]</sup> <a href="https://docs.docker.com/develop/dev-best-practices/">https://docs.docker.com/develop/dev-best-practices/</a></li>
+</ul>
+<h2 id="其他資源">其他資源</h2>
+<ul>
+<li><a href="https://github.com/opencontainers/image-spec">OCI - Image Spec</a></li>
+<li><a href="https://www.whitesourcesoftware.com/free-developer-tools/blog/docker-expose-port/">Docker Expose Port</a></li>
+<li><a href="https://github.com/hexops/dockerfile">Dockerfile best-practices for writing production-worthy Docker images</a></li>
+<li><a href="https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/">10 things to avoid in docker containers</a></li>
+</ul>
+              
+              
+                <div class="main-content-wrap-modifiedDate">
+                  <span>最後修改日期 / 2021-03-19</span>
+                </div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">標籤</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/optimize/">Optimize</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/dockerfile/">Dockerfile</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/image/">Image</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/" data-tooltip="不靠海的校園實境解謎活動 - Lost">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://github.com/tminecola">MineCola</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/" data-tooltip="不靠海的校園實境解謎活動 - Lost">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://blog.minecola.tw/2021/03/optimizing-the-image-build/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.minecola.tw%2F2021%2F03%2Foptimizing-the-image-build%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fblog.minecola.tw%2F2021%2F03%2Foptimizing-the-image-build%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://blog.minecola.tw/images/author/author.jpg" alt="作者的圖片" />
+    
+    <h4 id="about-card-name">MineCola</h4>
+    
+      <div id="about-card-bio">朝向 DevOps 之路邁進的研究生，沿途常被各式各樣花枝招展的新技術吸引，把什麼都學什麼都碰的人生紀錄在這</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        MS Student, NTUST
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Taipei, Taiwan
+      </div>
+    
+    
+      <div id="about-card-email">
+        <i class="fa fa-envelope"></i>
+        <br id="about-card-email-br" />
+        <a href="mailto:wang.minecola@gmail.com">wang.minecola@gmail.com</a>
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://blog.minecola.tw/images/sites/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.3/prism.min.js" integrity="sha256-haEv2ilTk2sXcJaGbkTtErRCHy/qGt3g+bGbgPf5OTY=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-vkww0vsxtlng4l4hwk9ubkde37wsievo78nuwug2hhv4fxftxtpyswttnw.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

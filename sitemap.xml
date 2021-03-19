@@ -3,32 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.minecola.tw/categories/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/tags/dockerfile/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/2021/03/optimizing-the-image-build/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/tags/image/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/tags/optimize/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/post/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/tags/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.minecola.tw/categories/%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E8%A1%93/</loc>
+    <lastmod>2021-03-19T08:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.minecola.tw/tags/alternate-reality-game/</loc>
     <lastmod>2021-01-05T18:00:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.minecola.tw/categories/</loc>
-    <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/</loc>
-    <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.minecola.tw/tags/moli-activity/</loc>
-    <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/post/</loc>
-    <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/</loc>
     <lastmod>2021-01-05T18:00:00+08:00</lastmod>
   </url>
   

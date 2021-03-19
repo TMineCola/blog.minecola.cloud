@@ -8,10 +8,19 @@
     <language>zh-tw</language>
     <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
     <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
-    <lastBuildDate>Tue, 07 Jul 2020 18:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 Mar 2021 08:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.minecola.tw/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dockerfile 撰寫與 Image 最佳化心得</title>
+      <link>https://blog.minecola.tw/2021/03/optimizing-the-image-build/</link>
+      <pubDate>Fri, 19 Mar 2021 08:00:00 +0800</pubDate>
+      <author>wang.minecola@gmail.com (MineCola)</author>
+      <guid>https://blog.minecola.tw/2021/03/optimizing-the-image-build/</guid>
+      <description>&lt;p&gt;最近在產學合作的專案當中實作許多 Infra&lt;sup&gt;[1]&lt;/sup&gt; 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>不靠海的校園實境解謎活動 - Lost</title>
