@@ -2,7 +2,7 @@
 title: "Dockerfile 撰寫與 Image 最佳化心得"
 date: 2021-03-19T08:00:00+08:00
 modified: 2021-03-19T08:00:00+08:00
-thumbnailImage: "/images/2021/03/20/docker.jpg"
+thumbnailImage: "/images/2021/03/20/docker_logo.jpg"
 thumbnailImagePosition: left
 categories:
 - 容器化技術
