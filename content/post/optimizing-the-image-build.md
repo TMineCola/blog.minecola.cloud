@@ -15,7 +15,7 @@ keywords:
 - Image
 - 最佳化
 showPagination: true
-draft: true
+draft: false
 ---
 
 最近在產學合作的專案當中實作許多 Infra<sup>[1]</sup> 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。
