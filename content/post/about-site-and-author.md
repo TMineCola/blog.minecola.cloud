@@ -9,6 +9,8 @@ coverCaption: "鄉下的可愛貓咪"
 coverMeta: in
 coverSize: full
 metaAlignment: center
+categories:
+- 歷程
 tags:
 - About Me
 keywords:
