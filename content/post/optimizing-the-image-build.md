@@ -58,7 +58,8 @@ Dockerfile 是一個以文字描述如何自動化建構 Image 的檔案，通�
 ##### RUN
 如同在 Shell 中下指令般，用於建構 Image 的環境， `RUN` 可以協助執行複雜的指令並且能夠透過反斜線 `\` 來將指令分割成多行，提高可讀、可維護性，例如像 Docker 官方文件中提供的範例：
 
-{{< codeblock "RUN example" >}}RUN apt-get update && apt-get install -y \
+{{< codeblock "RUN example" >}}
+RUN apt-get update && apt-get install -y \
     aufs-tools \
     automake \
     build-essential \
@@ -71,7 +72,8 @@ Dockerfile 是一個以文字描述如何自動化建構 Image 的檔案，通�
     ruby1.9.1 \
     ruby1.9.1-dev \
     s3cmd=1.1.* \
-&& rm -rf /var/lib/apt/lists/*{{< /codeblock >}}
+&& rm -rf /var/lib/apt/lists/*
+{{< /codeblock >}}
 
 這邊要特別注意的是 `RUN` 並不會拿來執行最後想要啟動的應用程式，如果要啟動應用程式則需要使用後面提到的 `CMD` 或 `ENTRYPOINT`。
 
@@ -99,11 +101,13 @@ RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l 
 ##### ENV
 基本上就跟平常在 Shell 中宣告環境變數一樣，如果不想讓環境變數殘留在建構好的 Image 中（包含建構中的任何一層）則官方建議的寫法會如下：
 
-{{< codeblock "Example for remove env variable" >}}FROM alpine
+{{< codeblock "Example for remove env variable" >}}
+FROM alpine
 RUN export VERSION="1.0.0" \
     && echo $VERSION > ./version \
     && unset VERSION
-CMD sh{{< /codeblock >}}
+CMD sh
+{{< /codeblock >}}
 
 透過這樣的方式來確保最後產生的 Image 是不會具有 VERSION 的環境變數，但是如果將 `ENV` 與 `unset` 分成兩個步驟來寫，則 ENV 那一層會保留著環境變數，直到 unset 層才會被移除。
 
@@ -112,7 +116,8 @@ CMD sh{{< /codeblock >}}
 
 除了從本機將檔案複製到當前環境底下之外，也可以從先前建構的環境底下複製，像是下面以 Java 應用程式打包為例，透過標記先前的建構 `gradle:6.4.0-jdk8` 取名為 `build` 後再當前環境將前一個環境中編譯好的 jar file 複製進來。
 
-{{< codeblock "Dockerfile / Build for Java application" >}}FROM gradle:6.4.0-jdk8 AS build
+{{< codeblock "Dockerfile / Build for Java application" >}}
+FROM gradle:6.4.0-jdk8 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build
@@ -121,7 +126,8 @@ FROM openjdk:8-jre-slim
 EXPOSE 4300
 RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/myService.jar{{< /codeblock >}}
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/myService.jar
+{{< /codeblock >}}
 
 ##### ENTRYPOINT
 設定 Image 中主要應用程式的進入點，通常會將固定不太會變動的部分放在 `ENTRYPOINT` 中，而會動態變化的則會建議以 `CMD` 附加在其後，可以參考下面藍色提示框中更詳細的說明。
@@ -171,12 +177,14 @@ RUN pwd
 
 如果還是不太理解的話，這裡有一個小範例可以讓大家嘗試看看，先寫一個 dockerfile 在當前目錄，並且執行後面的指令來觀察看看結果：
 
-{{< codeblock "Dockerfile" >}}FROM alpine:3.12.4
+{{< codeblock "Dockerfile" >}}
+FROM alpine:3.12.4
 ENTRYPOINT ["ls"]
 CMD ["-la", "/"]
 {{< /codeblock >}}
 
-{{< codeblock "bash / Add sudo if you need" >}}docker build --tag test/1 .
+{{< codeblock "bash / Add sudo if you need" >}}
+docker build --tag test/1 .
 docker run test/1
 docker run test/1 /
 docker run test/1 -alh /
@@ -224,7 +232,7 @@ docker run test/1 -alh /
     > API version:       1.40
 - Server: Docker Engine - Community
     > Version:          19.03.14
-    
+
     > API version:      1.40 (minimum version 1.12)
 
 #### 實作 (Lab)
@@ -236,7 +244,8 @@ docker run test/1 -alh /
 
 > 如果想執行看看可以使用指令：`docker run test`
 
-{{< codeblock "Dockerfile" >}}FROM ubuntu:focal
+{{< codeblock "Dockerfile" >}}
+FROM ubuntu:focal
 RUN apt-get update && apt-get install -y \
     vim \
     && rm -rf /var/lib/apt/lists/*
