@@ -8,9 +8,9 @@ dist: bionic
 # before_install
 # install - install any dependencies required
 install:
-    - wget https://github.com/gohugoio/hugo/releases/download/v0.73.0/hugo_0.73.0_Linux-64bit.deb
-    - sudo dpkg -i hugo_0.73.0_Linux-64bit.deb
-    - sudo rm hugo_0.73.0_Linux-64bit.deb
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.85.0/hugo_0.85.0_Linux-64bit.deb
+    - sudo dpkg -i hugo_0.85.0_Linux-64bit.deb
+    - sudo rm hugo_0.85.0_Linux-64bit.deb
     - sudo hugo version
 
 before_script:
