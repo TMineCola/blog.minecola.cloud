@@ -2,15 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Archives on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</title>
-    <link>https://blog.minecola.tw/archives/</link>
+    <link>https://blog.minecola.cloud/archives/</link>
     <description>Recent content in Archives on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
-    <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
-    
-	<atom:link href="https://blog.minecola.tw/archives/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <webMaster>wang.minecola@gmail.com (MineCola)</webMaster><atom:link href="https://blog.minecola.cloud/archives/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -2,41 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MineCola&#39;s Blog | 開發筆記 &amp; 雜談</title>
-    <link>https://blog.minecola.tw/</link>
+    <link>https://blog.minecola.cloud/</link>
     <description>Recent content on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
     <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
-    <lastBuildDate>Fri, 19 Mar 2021 08:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.minecola.tw/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 19 Mar 2021 08:00:00 +0800</lastBuildDate><atom:link href="https://blog.minecola.cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dockerfile 撰寫與 Image 最佳化心得</title>
-      <link>https://blog.minecola.tw/2021/03/optimizing-the-image-build/</link>
+      <link>https://blog.minecola.cloud/2021/03/optimizing-the-image-build/</link>
       <pubDate>Fri, 19 Mar 2021 08:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/2021/03/optimizing-the-image-build/</guid>
+      <guid>https://blog.minecola.cloud/2021/03/optimizing-the-image-build/</guid>
       <description>&lt;p&gt;最近在產學合作的專案當中實作許多 Infra&lt;sup&gt;[1]&lt;/sup&gt; 相關的佈建，尤其在 Dockerfile 的撰寫與 Image 的最小化上有一些小成果，因此補充閱讀ㄧ些資訊並結合一些經驗來分享順便以文防老。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>不靠海的校園實境解謎活動 - Lost</title>
-      <link>https://blog.minecola.tw/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</link>
+      <link>https://blog.minecola.cloud/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</link>
       <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</guid>
+      <guid>https://blog.minecola.cloud/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</guid>
       <description>&lt;p&gt;簡單來說這是一款「以國立暨南國際大學校園為背景的實境解謎遊戲」，趁著記憶還沒被抹去之前回顧一下這個活動，順便把一些心得與遺憾都記錄下來。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>關於這裡, 還有我</title>
-      <link>https://blog.minecola.tw/2020/03/about-site-and-author/</link>
+      <link>https://blog.minecola.cloud/2020/03/about-site-and-author/</link>
       <pubDate>Wed, 25 Mar 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/2020/03/about-site-and-author/</guid>
+      <guid>https://blog.minecola.cloud/2020/03/about-site-and-author/</guid>
       <description>&lt;p&gt;「寫一個網站紀錄開發生活」是我大學時期的想法，推遲了許久終於真正開始了，接下來的日子我會將過去的技術筆記、開發心路歷程及值得分享的雜事慢慢紀錄在這裡，趁著剩餘一年多的時光，分享、紀錄與回憶，希望能讓自己與不小心點進來的人都有所成長&lt;/p&gt;</description>
     </item>
     

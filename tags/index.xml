@@ -2,68 +2,64 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</title>
-    <link>https://blog.minecola.tw/tags/</link>
+    <link>https://blog.minecola.cloud/tags/</link>
     <description>Recent content in Tags on MineCola&#39;s Blog | 開發筆記 &amp; 雜談</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <managingEditor>wang.minecola@gmail.com (MineCola)</managingEditor>
     <webMaster>wang.minecola@gmail.com (MineCola)</webMaster>
-    <lastBuildDate>Fri, 19 Mar 2021 08:00:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.minecola.tw/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 19 Mar 2021 08:00:00 +0800</lastBuildDate><atom:link href="https://blog.minecola.cloud/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dockerfile</title>
-      <link>https://blog.minecola.tw/tags/dockerfile/</link>
+      <link>https://blog.minecola.cloud/tags/dockerfile/</link>
       <pubDate>Fri, 19 Mar 2021 08:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/tags/dockerfile/</guid>
+      <guid>https://blog.minecola.cloud/tags/dockerfile/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Image</title>
-      <link>https://blog.minecola.tw/tags/image/</link>
+      <link>https://blog.minecola.cloud/tags/image/</link>
       <pubDate>Fri, 19 Mar 2021 08:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/tags/image/</guid>
+      <guid>https://blog.minecola.cloud/tags/image/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Optimize</title>
-      <link>https://blog.minecola.tw/tags/optimize/</link>
+      <link>https://blog.minecola.cloud/tags/optimize/</link>
       <pubDate>Fri, 19 Mar 2021 08:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/tags/optimize/</guid>
+      <guid>https://blog.minecola.cloud/tags/optimize/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Alternate Reality Game</title>
-      <link>https://blog.minecola.tw/tags/alternate-reality-game/</link>
+      <link>https://blog.minecola.cloud/tags/alternate-reality-game/</link>
       <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/tags/alternate-reality-game/</guid>
+      <guid>https://blog.minecola.cloud/tags/alternate-reality-game/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MOLi Activity</title>
-      <link>https://blog.minecola.tw/tags/moli-activity/</link>
+      <link>https://blog.minecola.cloud/tags/moli-activity/</link>
       <pubDate>Tue, 07 Jul 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/tags/moli-activity/</guid>
+      <guid>https://blog.minecola.cloud/tags/moli-activity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>About Me</title>
-      <link>https://blog.minecola.tw/tags/about-me/</link>
+      <link>https://blog.minecola.cloud/tags/about-me/</link>
       <pubDate>Wed, 25 Mar 2020 18:00:00 +0800</pubDate>
       <author>wang.minecola@gmail.com (MineCola)</author>
-      <guid>https://blog.minecola.tw/tags/about-me/</guid>
+      <guid>https://blog.minecola.cloud/tags/about-me/</guid>
       <description></description>
     </item>
     

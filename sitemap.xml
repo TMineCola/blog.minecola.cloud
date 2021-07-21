@@ -1,89 +1,55 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>https://blog.minecola.tw/categories/</loc>
+    <loc>https://blog.minecola.cloud/categories/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/dockerfile/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/dockerfile/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/2021/03/optimizing-the-image-build/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/2021/03/optimizing-the-image-build/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/image/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/image/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/optimize/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/optimize/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/post/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/post/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/categories/%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E8%A1%93/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/categories/%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E8%A1%93/</loc>
     <lastmod>2021-03-19T08:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/alternate-reality-game/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/alternate-reality-game/</loc>
     <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/moli-activity/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/moli-activity/</loc>
     <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/2020/07/moli-lost-an-alternate-reality-game-in-ncnu/</loc>
     <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/categories/%E6%B4%BB%E5%8B%95/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/categories/%E6%B4%BB%E5%8B%95/</loc>
     <lastmod>2021-01-05T18:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/tags/about-me/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/tags/about-me/</loc>
     <lastmod>2020-03-26T19:20:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/categories/%E6%AD%B7%E7%A8%8B/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/categories/%E6%AD%B7%E7%A8%8B/</loc>
     <lastmod>2020-03-26T19:20:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/2020/03/about-site-and-author/</loc>
+  </url><url>
+    <loc>https://blog.minecola.cloud/2020/03/about-site-and-author/</loc>
     <lastmod>2020-03-26T19:20:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.minecola.cloud/archives/</loc>
   </url>
-  
-  <url>
-    <loc>https://blog.minecola.tw/archives/</loc>
-  </url>
-  
 </urlset>
